@@ -91,3 +91,22 @@ function onFileChange(event) {
         fileInput.value = null;
     };
 }
+
+function onDoubleClick(event) {
+    const text = textInput.value;
+    if (text !== "") {
+        ctx.save();
+        ctx.lineWidth = 1;
+        ctx.font = "68px sans-serif";
+        ctx.fillText(text, event.offsetX, event.offsetY);
+        ctx.restore();
+    }
+}
+
+function onSaveClick() {
+    const url = canvas.toDataURL();
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "myDrawing.png";
+    a.click();
+}

@@ -22,7 +22,6 @@ ctx.lineCap = "round";
 let isPainting = false;
 let isFilling = false;
 
-
 function onMove(event) {
     if (isPainting) {
         ctx.lineTo(event.offsetX, event.offsetY);
@@ -53,4 +52,42 @@ function onColorClick(event) {
     ctx.strokeStyle = colorValue;
     ctx.fillStyle = colorValue;
     color.value = colorValue;
+}
+
+function onModeClick() {
+    if (isFilling) {
+        isFilling = false;
+        modeBtn.innerText = "Fill";
+    } else {
+        isFilling = true;
+        modeBtn.innerText = "Draw";
+    }
+}
+
+function onCanvasClick() {
+    if (isFilling) {
+        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    }
+}
+
+function onDestroyClick() {
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
+function onEraserClick() {
+    ctx.strokeStyle = "white";
+    isFilling = false;
+    modeBtn.innerText = "Fill";
+}
+
+function onFileChange(event) {
+    const file = event.target.files[0];
+    const url = URL.createObjectURL(file);
+    const image = new Image();
+    image.src = url;
+    image.onload = function () {
+        ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        fileInput.value = null;
+    };
 }

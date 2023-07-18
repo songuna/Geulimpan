@@ -110,3 +110,11 @@ function onSaveClick() {
     a.download = "myDrawing.png";
     a.click();
 }
+
+canvas.addEventListener("dblclick", onDoubleClick);
+canvas.addEventListener("mousemove", onMove);
+canvas.addEventListener("mousedown", startPainting);
+canvas.addEventListener("mouseup", cancelPainting);
+canvas.addEventListener("mouseleave", cancelPainting);
+canvas.addEventListener("click", onCanvasClick);
+lineWidth.addEventListener("change", onLineWidthChange);

@@ -21,3 +21,36 @@ ctx.lineWidth = lineWidth.value;
 ctx.lineCap = "round";
 let isPainting = false;
 let isFilling = false;
+
+
+function onMove(event) {
+    if (isPainting) {
+        ctx.lineTo(event.offsetX, event.offsetY);
+        ctx.stroke();
+        return;
+    }
+    ctx.moveTo(event.offsetX, event.offsetY);
+}
+function startPainting() {
+    isPainting = true;
+}
+function cancelPainting() {
+    isPainting = false;
+    // ctx.fill();
+    ctx.beginPath();
+}
+function onLineWidthChange(event) {
+    ctx.lineWidth = event.target.value;
+}
+
+function onColorChange(event) {
+    ctx.strokeStyle = event.target.value;
+    ctx.fillStyle = event.target.value;
+}
+
+function onColorClick(event) {
+    const colorValue = event.target.dataset.color;
+    ctx.strokeStyle = colorValue;
+    ctx.fillStyle = colorValue;
+    color.value = colorValue;
+}
